@@ -9,6 +9,17 @@ export const GAME_CONFIG = {
     horseX: 250,
     idleFramesPerSecond: 2,
   },
+  race: {
+    startLineX: 320,
+    startingGap: 24,
+    finishLineX: 4800,
+    countdownSeconds: 3,
+    minimumSpeed: 255,
+    maximumSpeed: 330,
+    runFramesPerSecond: 10,
+    cameraAnchorRatio: 0.38,
+    finishLineScreenRatio: 0.78,
+  },
 } as const;
 
 export const HORSE_LIMITS = {

@@ -8,6 +8,9 @@
     <title>Gallop Night | Pixel Horse Racing</title>
   </head>
   <body>
+    <button class="audio-toggle audio-toggle--global" type="button" data-audio-toggle aria-pressed="false" aria-label="Mute game audio">
+      <span aria-hidden="true">VOL</span><span data-audio-label>Sound on</span>
+    </button>
     <div id="landing-screen" data-screen>
       <div class="scroll-progress" aria-hidden="true"><span></span></div>
       <header class="site-header" id="top">
@@ -172,10 +175,15 @@
         <div class="track-canvas-frame">
           <canvas id="game-canvas" width="960" height="540">Your browser does not support HTML5 Canvas.</canvas>
           <p class="track-loading" data-track-loading>Loading racers...</p>
+          <button class="audio-toggle audio-toggle--track" type="button" data-audio-toggle aria-pressed="false" aria-label="Mute game audio">
+            <span aria-hidden="true">VOL</span><span data-audio-label>Sound on</span>
+          </button>
+          <button class="skip-audio" type="button" data-skip-trumpets hidden>Skip intro &gt;</button>
+          <button class="track-race-control" type="button" data-race-control hidden disabled>Start race</button>
         </div>
         <div class="track-footer">
           <div class="track-lineup" data-track-lineup></div>
-          <p>Race movement and finish logic come next.</p>
+          <p>Watch the pack, follow the camera, and cheer your color home.</p>
         </div>
       </div>
     </section>

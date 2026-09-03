@@ -21,6 +21,11 @@ export class SpriteAnimation {
     }
   }
 
+  public reset(): void {
+    this.currentFrame = 0;
+    this.elapsedSeconds = 0;
+  }
+
   public get frameIndex(): number {
     return this.currentFrame;
   }

@@ -22,6 +22,6 @@ export const IDLE_CONTENT_BOUNDS: Record<HorseColor, SpriteContentBounds> = {
 };
 
 export const RUN_CONTENT_BOUNDS: SpriteContentBounds = {
-  top: 402,
-  bottom: 580,
+  top: 388,
+  bottom: 594,
 };
