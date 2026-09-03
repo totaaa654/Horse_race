@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#28551d" />
+    <meta name="description" content="Gallop Night is a cheerful pixel-art horse racing game made for family game nights." />
+    <title>Gallop Night | Pixel Horse Racing</title>
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <header class="site-header" id="top">
+      <a class="brand" href="#top" aria-label="Gallop Night home">
+        <span class="brand__mark">GN</span>
+        <span>Gallop Night</span>
+      </a>
+      <a class="header-link" href="#about">About the game</a>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="game-title">
+        <div class="hero__scene" aria-hidden="true"></div>
+        <div class="hero__inner">
+          <div class="hero__copy reveal">
+            <p class="eyebrow">Ready, set, gallop!</p>
+            <h1 id="game-title">Bring the<br />race <span>home.</span></h1>
+            <p class="hero__intro">Choose a color, call your champion, and turn family game night into a cheering section.</p>
+            <div class="hero__actions">
+              <button class="pixel-button" type="button" data-start-race>
+                <span>Start race</span><span aria-hidden="true">&gt;</span>
+              </button>
+              <a class="secondary-link" href="#about">What is it about?</a>
+            </div>
+            <p class="hero__meta">2-8 horses <span aria-hidden="true">/</span> One screen <span aria-hidden="true">/</span> No sign-up</p>
+            <p class="start-note" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="hero__racer reveal reveal--late" aria-hidden="true">
+            <div class="horse-frame"><img src="/assets/horses/red/idle.png" alt="" /></div>
+            <p>Red is ready!</p>
+          </div>
+        </div>
+        <a class="scroll-cue" href="#about"><span>Scroll to explore</span><span aria-hidden="true">v</span></a>
+      </section>
+
+      <div class="ticker" aria-hidden="true">
+        <div>Pick your horse <span>*</span> Cheer your color <span>*</span> Race together <span>*</span> Pick your horse <span>*</span> Cheer your color <span>*</span> Race together <span>*</span></div>
+      </div>
+
+      <section class="about section" id="about" aria-labelledby="about-title">
+        <div class="section-label reveal"><span>01</span> About the game</div>
+        <div class="about__grid">
+          <div class="reveal">
+            <h2 id="about-title">Small horses.<br /><em>Big energy.</em></h2>
+          </div>
+          <div class="about__copy reveal reveal--late">
+            <p class="lead">Gallop Night is a quick, colorful horse race built for the people already in the room.</p>
+            <p>No accounts. No complicated rules. Everyone picks a unique horse, the race begins, and the whole family watches the track unfold together.</p>
+            <div class="player-range"><strong>2</strong><span>to</span><strong>8</strong><span>players</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="steps section" id="how" aria-labelledby="steps-title">
+        <div class="section-label section-label--light reveal"><span>02</span> How it works</div>
+        <div class="steps__heading reveal">
+          <h2 id="steps-title">From the stable<br />to the finish.</h2>
+          <p>Three simple steps. One unpredictable winner.</p>
+        </div>
+        <ol class="steps__list">
+          <li class="step reveal"><span class="step__number">01</span><div><h3>Choose the field</h3><p>Decide how many horses will race, from a quick two-horse dash to a full eight-lane showdown.</p></div></li>
+          <li class="step reveal"><span class="step__number">02</span><div><h3>Claim your colors</h3><p>Every player picks a unique pixel racer. Once a color is claimed, it belongs to that player.</p></div></li>
+          <li class="step reveal"><span class="step__number">03</span><div><h3>Watch and cheer</h3><p>The countryside rolls by, the horses trade places, and everybody finds out who takes the crown.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="together section" aria-labelledby="together-title">
+        <div class="together__scene" aria-hidden="true"></div>
+        <div class="together__card reveal">
+          <p class="eyebrow">Made for the living room</p>
+          <h2 id="together-title">One screen.<br />Everyone together.</h2>
+          <p>Put it on the biggest screen in the house, gather around, and let the loudest cheering begin.</p>
+        </div>
+      </section>
+
+      <section class="final-cta section" aria-labelledby="cta-title">
+        <div class="final-cta__stamp reveal" aria-hidden="true">8 colors<br />1 winner</div>
+        <div class="final-cta__copy reveal reveal--late">
+          <p class="eyebrow">Your race is waiting</p>
+          <h2 id="cta-title">Who are you<br />betting on?</h2>
+          <p>For bragging rights only, of course.</p>
+          <button class="pixel-button pixel-button--dark" type="button" data-start-race><span>Start race</span><span aria-hidden="true">&gt;</span></button>
+          <p class="start-note" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand brand--footer" href="#top"><span class="brand__mark">GN</span><span>Gallop Night</span></a>
+      <p>Made for family game night.</p>
+      <a href="#top">Back to top ^</a>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
