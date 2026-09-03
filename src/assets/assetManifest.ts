@@ -18,7 +18,7 @@ export const assetManifest = {
     bottomScenery: '/assets/scenery/tracks/bottom-scenery.png',
   },
   horse: (color: HorseColor) => ({
-    idle: `/assets/horses/${color}/idle.png`,
+    idle: `/assets/horses/${color}/idle.png?v=idle-atlas-3`,
     run: `/assets/horses/${color}/run.png`,
   }),
 } as const;

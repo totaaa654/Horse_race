@@ -1,4 +1,5 @@
 import type { GameAssets } from '../assets/assetLoader';
+import { IDLE_CONTENT_BOUNDS } from '../animation/horseSpriteLayout';
 import type { Horse } from '../entities/Horse';
 
 interface TrackLayout {
@@ -7,6 +8,9 @@ interface TrackLayout {
   bottomHeight: number;
   trackTop: number;
 }
+
+const SKY_COLOR = '#2398f5';
+const TRACK_DIRT_COLOR = '#c17830';
 
 export class GameRenderer {
   private readonly context: CanvasRenderingContext2D;
@@ -25,12 +29,14 @@ export class GameRenderer {
     this.context.imageSmoothingEnabled = false;
   }
 
-  public render(horse: Horse): void {
+  public render(horses: readonly Horse[]): void {
     const { width, height } = this.canvas;
     const layout = this.calculateLayout(height);
 
     this.context.imageSmoothingEnabled = false;
     this.context.clearRect(0, 0, width, height);
+    this.context.fillStyle = SKY_COLOR;
+    this.context.fillRect(0, 0, width, layout.topHeight);
     this.drawRepeated(this.assets.topScenery, 0, layout.topHeight, width);
 
     for (let laneIndex = 0; laneIndex < this.laneCount; laneIndex += 1) {
@@ -38,14 +44,17 @@ export class GameRenderer {
       this.drawRepeated(this.assets.lane, laneY, layout.laneHeight, width);
     }
 
+    const bottomY = layout.trackTop + this.laneCount * layout.laneHeight;
+    this.context.fillStyle = TRACK_DIRT_COLOR;
+    this.context.fillRect(0, bottomY, width, layout.bottomHeight);
     this.drawRepeated(
       this.assets.bottomScenery,
-      layout.trackTop + this.laneCount * layout.laneHeight,
+      bottomY,
       layout.bottomHeight,
       width,
     );
 
-    this.drawHorse(horse, layout);
+    horses.forEach((horse) => this.drawHorse(horse, layout));
   }
 
   private calculateLayout(canvasHeight: number): TrackLayout {
@@ -76,24 +85,31 @@ export class GameRenderer {
   }
 
   private drawHorse(horse: Horse, layout: TrackLayout): void {
+    const horseIdle = this.assets.horseIdle.get(horse.color);
+    if (!horseIdle) {
+      return;
+    }
+
     const frameCount = horse.idleAnimation.frameCount;
     const sourceX = Math.floor(
-      (horse.idleAnimation.frameIndex * this.assets.horseIdle.width) / frameCount,
+      (horse.idleAnimation.frameIndex * horseIdle.width) / frameCount,
     );
     const nextSourceX = Math.floor(
-      ((horse.idleAnimation.frameIndex + 1) * this.assets.horseIdle.width) / frameCount,
+      ((horse.idleAnimation.frameIndex + 1) * horseIdle.width) / frameCount,
     );
     const sourceWidth = nextSourceX - sourceX;
-    const sourceHeight = this.assets.horseIdle.height;
-    const maximumHeight = Math.max(1, layout.laneHeight - 8);
+    const contentBounds = IDLE_CONTENT_BOUNDS[horse.color];
+    const sourceHeight = contentBounds.bottom - contentBounds.top;
+    const lanePadding = Math.max(3, Math.round(layout.laneHeight * 0.06));
+    const maximumHeight = Math.max(1, layout.laneHeight - lanePadding * 2);
     const drawHeight = Math.min(sourceHeight, maximumHeight);
     const drawWidth = Math.max(1, Math.round(sourceWidth * (drawHeight / sourceHeight)));
     const laneTop = layout.trackTop + horse.laneIndex * layout.laneHeight;
-    const drawY = laneTop + layout.laneHeight - drawHeight;
+    const drawY = laneTop + layout.laneHeight - drawHeight - lanePadding;
     this.context.drawImage(
-      this.assets.horseIdle,
+      horseIdle,
       sourceX,
-      0,
+      contentBounds.top,
       sourceWidth,
       sourceHeight,
       Math.round(horse.x),

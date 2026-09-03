@@ -8,16 +8,16 @@
     <title>Gallop Night | Pixel Horse Racing</title>
   </head>
   <body>
-    <div class="scroll-progress" aria-hidden="true"><span></span></div>
-    <header class="site-header" id="top">
+    <div id="landing-screen" data-screen>
+      <div class="scroll-progress" aria-hidden="true"><span></span></div>
+      <header class="site-header" id="top">
       <a class="brand" href="#top" aria-label="Gallop Night home">
-        <span class="brand__mark">GN</span>
-        <span>Gallop Night</span>
+        <img class="brand__logo" src="/assets/others/logo.png" alt="Gallop Night" />
       </a>
       <a class="header-link" href="#about">About the game</a>
-    </header>
+      </header>
 
-    <main>
+      <main>
       <section class="hero" aria-labelledby="game-title">
         <div class="hero__scene" aria-hidden="true"></div>
         <div class="hero__inner">
@@ -36,8 +36,8 @@
           </div>
 
           <div class="hero__racer reveal reveal--late" aria-hidden="true">
-            <div class="horse-frame"><img src="/assets/horses/red/idle.png" alt="" /></div>
-            <p>Red is ready!</p>
+            <img class="hero__art" src="/assets/others/img1.png" alt="" />
+            <p>Pick your color. Chase the crown.</p>
           </div>
         </div>
         <a class="scroll-cue" href="#about"><span>Scroll to explore</span><span aria-hidden="true">v</span></a>
@@ -93,13 +93,92 @@
           <p class="start-note" role="status" aria-live="polite"></p>
         </div>
       </section>
-    </main>
+      </main>
 
-    <footer>
-      <a class="brand brand--footer" href="#top"><span class="brand__mark">GN</span><span>Gallop Night</span></a>
-      <p>Made for family game night.</p>
-      <a href="#top">Back to top ^</a>
-    </footer>
+      <footer>
+        <a class="brand brand--footer" href="#top"><img class="brand__logo" src="/assets/others/logo.png" alt="Gallop Night" /></a>
+        <p>Made for family game night.</p>
+        <a href="#top">Back to top ^</a>
+      </footer>
+    </div>
+
+    <section class="game-screen setup-screen" id="setup-screen" data-screen hidden aria-labelledby="setup-title">
+      <header class="game-screen__header">
+        <button class="icon-button" type="button" data-home aria-label="Return to home">&lt;</button>
+        <img class="game-screen__logo" src="/assets/others/logo.png" alt="Gallop Night" />
+        <span class="game-screen__stage">Race setup</span>
+      </header>
+
+      <div class="setup-shell">
+        <div class="setup-step" data-setup-step="count">
+          <p class="setup-kicker">Step 1 of 2</p>
+          <h2 id="setup-title">How many horses?</h2>
+          <p class="setup-intro">Choose the size of tonight's field. Every horse gets its own lane and color.</p>
+          <div class="count-grid" role="group" aria-label="Number of horses">
+            <button type="button" data-horse-count="2">2</button>
+            <button type="button" data-horse-count="3">3</button>
+            <button type="button" data-horse-count="4">4</button>
+            <button type="button" data-horse-count="5">5</button>
+            <button type="button" data-horse-count="6">6</button>
+            <button type="button" data-horse-count="7">7</button>
+            <button type="button" data-horse-count="8">8</button>
+          </div>
+          <div class="setup-action-row">
+            <p data-count-summary>4 horses will enter the track</p>
+            <button class="pixel-button" type="button" data-next-colors><span>Choose colors</span><span aria-hidden="true">&gt;</span></button>
+          </div>
+        </div>
+
+        <div class="setup-step" data-setup-step="colors" hidden>
+          <div class="color-step__heading">
+            <div>
+              <p class="setup-kicker">Step 2 of 2</p>
+              <h2>Pick each color.</h2>
+              <p class="setup-intro">Select a horse, then give it an available color. Each color can race once.</p>
+            </div>
+            <button class="random-button" type="button" data-randomize><span aria-hidden="true">*</span> Randomize all</button>
+          </div>
+
+          <div class="color-builder">
+            <div class="horse-roster" data-horse-roster aria-label="Racing horses"></div>
+            <div class="palette-panel">
+              <p>Available colors</p>
+              <div class="color-palette" data-color-palette></div>
+            </div>
+          </div>
+
+          <div class="setup-action-row setup-action-row--split">
+            <button class="text-button" type="button" data-back-count>&lt; Change horse count</button>
+            <button class="pixel-button" type="button" data-go-track disabled><span>0 of 4 selected</span><span aria-hidden="true">&gt;</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="game-screen track-screen" id="track-screen" data-screen hidden aria-labelledby="track-title">
+      <header class="game-screen__header game-screen__header--track">
+        <button class="icon-button" type="button" data-back-setup aria-label="Return to horse setup">&lt;</button>
+        <div class="track-heading"><p>Racetrack</p><h2 id="track-title">Racers ready!</h2></div>
+        <div class="track-header-actions">
+          <span class="game-screen__stage" data-track-count></span>
+          <button class="fullscreen-button" type="button" data-fullscreen aria-pressed="false">
+            <span class="fullscreen-button__icon" aria-hidden="true">[ ]</span>
+            <span data-fullscreen-label>Fullscreen</span>
+          </button>
+        </div>
+      </header>
+      <div class="track-shell">
+        <div class="track-status"><span class="track-status__light"></span><span data-track-status>Preparing the track...</span></div>
+        <div class="track-canvas-frame">
+          <canvas id="game-canvas" width="960" height="540">Your browser does not support HTML5 Canvas.</canvas>
+          <p class="track-loading" data-track-loading>Loading racers...</p>
+        </div>
+        <div class="track-footer">
+          <div class="track-lineup" data-track-lineup></div>
+          <p>Race movement and finish logic come next.</p>
+        </div>
+      </div>
+    </section>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -7,7 +7,7 @@ export const GAME_CONFIG = {
     laneCount: 3,
     horseLaneIndex: 1,
     horseX: 250,
-    idleFramesPerSecond: 7,
+    idleFramesPerSecond: 2,
   },
 } as const;
 

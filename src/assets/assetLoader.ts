@@ -1,8 +1,10 @@
+import type { HorseColor } from './assetManifest';
+
 export interface GameAssets {
   lane: HTMLImageElement;
   topScenery: HTMLImageElement;
   bottomScenery: HTMLImageElement;
-  horseIdle: HTMLImageElement;
+  horseIdle: ReadonlyMap<HorseColor, HTMLImageElement>;
 }
 
 function loadImage(source: string): Promise<HTMLImageElement> {
@@ -22,14 +24,21 @@ export async function loadGameAssets(paths: {
   lane: string;
   topScenery: string;
   bottomScenery: string;
-  horseIdle: string;
+  horses: ReadonlyArray<{ color: HorseColor; idle: string }>;
 }): Promise<GameAssets> {
-  const [lane, topScenery, bottomScenery, horseIdle] = await Promise.all([
+  const [lane, topScenery, bottomScenery, horseImages] = await Promise.all([
     loadImage(paths.lane),
     loadImage(paths.topScenery),
     loadImage(paths.bottomScenery),
-    loadImage(paths.horseIdle),
+    Promise.all(
+      paths.horses.map(async ({ color, idle }) => [color, await loadImage(idle)] as const),
+    ),
   ]);
 
-  return { lane, topScenery, bottomScenery, horseIdle };
+  return {
+    lane,
+    topScenery,
+    bottomScenery,
+    horseIdle: new Map(horseImages),
+  };
 }
